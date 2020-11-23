@@ -1,4 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
+  const apiKey = "d562cbd8265941b5d14b93525f5bef9c";
+
   $("#search-button").on("click", function() {
     var searchValue = $("#search-value").val();
 
@@ -20,7 +22,7 @@ $(document).ready(function() {
   function searchWeather(searchValue) {
     $.ajax({
       type: "GET",
-      url: "http://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=7ba67ac190f85fdba2e2dc6b9d32e93c&units=imperial",
+      url: `http://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=${apikey}`,
       dataType: "json",
       success: function(data) {
         // create history link for this search
