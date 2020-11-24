@@ -1,6 +1,6 @@
 $(document).ready(function () {
-  const apiKey = "d562cbd8265941b5d14b93525f5bef9c";
-
+  var apiKey = "d562cbd8265941b5d14b93525f5bef9c";
+  var queryURL =
   $("#search-button").on("click", function() {
     var searchValue = $("#search-value").val();
 
@@ -18,11 +18,11 @@ $(document).ready(function () {
     var li = $("<li>").addClass("list-group-item list-group-item-action").text(text);
     $(".history").append(li);
   }
-
+  var apiKey = "d562cbd8265941b5d14b93525f5bef9c";
   function searchWeather(searchValue) {
     $.ajax({
       type: "GET",
-      url: `http://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=${apikey}`,
+      url: `http://api.openweathermap.org/data/2.5/weather?q=${searchValue}&appid=${apiKey}`,
       dataType: "json",
       success: function(data) {
         // create history link for this search
