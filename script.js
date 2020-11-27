@@ -15,7 +15,7 @@ $(document).ready(function () {
   });
 
   function makeRow(text) {
-    var li = $("<li>").addClass("list-group-item list-group-item-action").text(text);
+    var li = $("<li>").addClass("list-group-item list-group-item-action text-center").text(text);
     $(".history").append(li);
   }
 
