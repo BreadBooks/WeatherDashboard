@@ -39,7 +39,7 @@ $(document).ready(function () {
                 var card = $(`<div>`).addClass(`card`);
                 var wind = $(`<p>`).addClass(`card-text`).text(`Wind Speed: ` + data.wind.speed + ` MPH`);
                 var humid = $(`<p>`).addClass(`card-text`).text(`Humidity: ` + data.main.humidity + `%`);
-                var temp = $(`<p>`).addClass(`card-text`).text(`Temperature: ` + data.main.temp + ` °F`);
+                var temp = $(`<p>`).addClass(`card-text`).text(`Temperature: ` + Math.round(((parseFloat(data.main.temp)-273.15)*1.8)+32) + ` °F`);
                 var cardBody = $(`<div>`).addClass(`card-body`);
                 var img = $(`<img>`).attr(`src`, `http://openweathermap.org/img/w/` + data.weather[0].icon + `.png`);
 
@@ -57,57 +57,39 @@ $(document).ready(function () {
 
     function getForecast(citySearch) {
         $.ajax({
-            url: `http://api.openweathermap.org/data/2.5/forecast?q=${citySearch}&appid=${apiKey}`,
-            method: "GET",
-            dataType: `json`,
-            }).then(function(data){
-                var fivedayFore = [];
+          type: "GET",
+          url: "http://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&appid=7ba67ac190f85fdba2e2dc6b9d32e93c&units=imperial",
+          dataType: "json",
+          success: function(data) {
 
-                for (var i = 4; i < data.list.length && i < data.list.length; i += 8)
-                    fivedayFore.push(data.list[i]);
-
-                var cityForecast = $(".city-forecast");
-                $(cityForecast).empty();
-
-                for (var i = 0; i < fivedayFore.length; i++)
-                {
-                    var dayDate = new Date(fivedayFore[i].dt_txt);
-                    var cityCard = $("<div>");
-                    $(cityCard).addClass("card fluid bg-primary city-forecast-day");
-                    var cityBody = $("<div>");
-                    $(cityBody).addClass("card-body forecast-body");
-
-                    var forecastDate = $("<h4>");
-
-                    $(forecastDate).html(`${(dayDate.getMonth() + 1)}/${dayDate.getDate()}/${dayDate.getFullYear()}`);
-
-                    var imgIcon = $("<img>");
-                    $(imgIcon).addClass("forecast-icon");
-                    $(imgIcon).attr("src", `https://openweathermap.org/img/wn/${fivedayFore[i].weather[0].icon}@2x.png`);
-                    $(imgIcon).attr("alt", `city-forecast-icon-${(i + 1)}`);
-
-                    var forecastTemp = $("<div>");
-
-                    var tempK = fivedayFore[i].main.temp;
-                    var tempF = (tempK - 273.15) * 9/5 + 32;
-
-                    $(forecastTemp).addClass("forecast-item");
-                    $(forecastTemp).html(`Temp: ${tempF.toFixed(2)} &deg;F`);
-
-                    var forecastHumd = $("<div>");
-
-                    $(forecastHumd).html(`Humidity: ${fivedayFore[i].main.humidity}%`);
-
-                    $(cityBody).append(forecastDate, imgIcon, forecastTemp, forecastHumd);
-
-                    $(cityCard).append(cityBody);
-
-                    $(cityForecast).append(cityCard);
-            }
-        });
-
-        };
+            $("#forecast").html("<h4 class=\"mt-3\">5-Day Forecast:</h4>").append("<div class=\"row\">");
     
+        
+            
+                
+            for (var i = 0; i < data.list.length; i++) {
+                var Temperature = Math.round(((parseFloat(data.list[i].main.temp_max)-273.15)*1.8)+32);
+              if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
+          
+                var col = $("<div>").addClass("col-md-2");
+                var card = $("<div>").addClass("card bg-primary text-white");
+                var body = $("<div>").addClass("card-body p-2");
+    
+                var title = $("<h5>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
+    
+                var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
+    
+                var p1 = $("<p>").addClass("card-text").text("Temp: " + Math.round(((parseFloat(data.list[i].main.temp_max)-273.15)*1.8)+32) + " °F");
+                var p2 = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
+    
+           
+                col.append(card.append(body.append(title, img, p1, p2)));
+                $("#forecast .row").append(col);
+              }
+            }
+          }
+        });
+      }
 
 function getUVIndex(lat, lon) {
     $.ajax({
