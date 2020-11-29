@@ -1,6 +1,6 @@
 body {
   text-shadow: 1px 2px 2px rgb(98, 76, 158);
-  background-image: url(https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  
   background-color: rgb(230, 210, 248);
   font-family: 'Poiret One', cursive;
 }
@@ -16,7 +16,6 @@ body {
   background-color: pink;
 }
 .card {
-
   text-align: center;
   background-color:rgb(192, 225, 255);
   text-shadow: 2px 2px 2px black;
@@ -28,4 +27,9 @@ body {
 #search-button {
   background-color: pink;
   border: none;
+}
+
+#forecast {
+  padding-bottom: 10px;
+  margin: auto;
 }
