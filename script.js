@@ -1,6 +1,7 @@
-$(document).ready(function () {
+ocument).ready(function () {
+    // Api Key
     const apiKey = `d562cbd8265941b5d14b93525f5bef9c`;
-
+// Search Button
     $(`#search-button`).on(`click`, function () {
         var citySearch = $(`#search-value`).val();
         $(`#search-value`).val(``);
@@ -15,7 +16,7 @@ $(document).ready(function () {
         var li = $(`<li>`).addClass(`list-group-item list-group-item-action text-center justify-content-md-center`).text(text);
         $(`.history`).append(li);
     }
-
+    // Initial Weather Search
     function searchWeather(citySearch) {
         var queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=${apiKey}`
         $.ajax({
@@ -24,11 +25,11 @@ $(document).ready(function () {
             dataType: `json`,
             success: function (data) {
                 $(`#today`).empty();
-
                 var title = $(`<h3>`).addClass(`card-title`).text(data.name + ` (` + new Date().toLocaleDateString() + `)`);
                 var card = $(`<div>`).addClass(`card`);
                 var wind = $(`<p>`).addClass(`card-text`).text(`Wind Speed: ` + data.wind.speed + ` MPH`);
-                var humid = $(`<p>`).addClass(`card-text`).text(`Humidity: ` + data.main.humidity + `%`);
+                const newLocal = $(`<p>`).addClass(`card-text`).text(`Humidity: ` + data.main.humidity + `%`);
+                var humid = newLocal;
                 var temp = $(`<p>`).addClass(`card-text`).text(`Temperature: ` + Math.round(((parseFloat(data.main.temp) - 273.15) * 1.8) + 32) + ` °F`);
                 var cardBody = $(`<div>`).addClass(`card-body`);
                 var img = $(`<img>`).attr(`src`, `http://openweathermap.org/img/w/` + data.weather[0].icon + `.png`);
@@ -49,7 +50,7 @@ $(document).ready(function () {
             }
         });
     }
-
+// UV Levels, Color change to show warning levels
     function fetchUV(lat, lon) {
         var queryURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
         $.ajax({
@@ -75,6 +76,7 @@ $(document).ready(function () {
             }
         });
     }
+    // 5-Day Forecast
     function fiveDayForecast(citySearch) {
         var queryURL = `http://api.openweathermap.org/data/2.5/forecast?q=${citySearch}&appid=${apiKey}`
         $.ajax({
@@ -95,7 +97,7 @@ $(document).ready(function () {
                         var title = $("<h5>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
 
                         var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
-
+// Adjusting Tempature to be in Fahrenheit rather than Kelvin
                         var p1 = $("<p>").addClass("card-text").text("Temp: " + Math.round(((parseFloat(data.list[i].main.temp_max) - 273.15) * 1.8) + 32) + " °F");
                         var p2 = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
                         var p3 = $("<p>").addClass("card-text").text("Wind Speed: " + data.list[i].wind.speed + "MPH");
@@ -108,6 +110,7 @@ $(document).ready(function () {
             }
         });
     }
+    // Calling Clear All Button
     clearBtn();
     var history = JSON.parse(window.localStorage.getItem(`history`)) || [];
 
@@ -119,7 +122,7 @@ $(document).ready(function () {
         makeRow(history[i]);
     }
 });
-
+// Clear All Button
 function clearBtn() {
     const row1 = $(`<div class="row clearBtn justify-content-md-center">`);
     $(row1).append(`<div class="col-8 justify-content-md-center">`);
