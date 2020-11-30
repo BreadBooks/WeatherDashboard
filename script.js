@@ -25,11 +25,11 @@ $(document).ready(function () {
             dataType: `json`,
             success: function (data) {
                 $(`#today`).empty();
-
                 var title = $(`<h3>`).addClass(`card-title`).text(data.name + ` (` + new Date().toLocaleDateString() + `)`);
                 var card = $(`<div>`).addClass(`card`);
                 var wind = $(`<p>`).addClass(`card-text`).text(`Wind Speed: ` + data.wind.speed + ` MPH`);
-                var humid = $(`<p>`).addClass(`card-text`).text(`Humidity: ` + data.main.humidity + `%`);
+                const newLocal = $(`<p>`).addClass(`card-text`).text(`Humidity: ` + data.main.humidity + `%`);
+                var humid = newLocal;
                 var temp = $(`<p>`).addClass(`card-text`).text(`Temperature: ` + Math.round(((parseFloat(data.main.temp) - 273.15) * 1.8) + 32) + ` °F`);
                 var cardBody = $(`<div>`).addClass(`card-body`);
                 var img = $(`<img>`).attr(`src`, `http://openweathermap.org/img/w/` + data.weather[0].icon + `.png`);
