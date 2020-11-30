@@ -25,7 +25,7 @@ Emailing me at BreadBooks99@gmail.com
 
 ### Licensing
 
-[MIT](https://choosealicense.com/licenses/MIT).
+[MIT](https://choosealicense.com/licenses/mit).
 
 ### Questions/Contact Me
 View my GitHub portfolio [Here](https://github.com/BreadBooks)
