@@ -2,9 +2,9 @@ $(document).ready(function () {
     // Api Key
     const apiKey = `d562cbd8265941b5d14b93525f5bef9c`;
 // Search Button
-    $(`#searchBtn`).on(`click`, function () {
-        var citySearch = $(`#city-search`).val();
-        $(`#city-search`).val(``);
+    $(`#search-button`).on(`click`, function () {
+        var citySearch = $(`#search-value`).val();
+        $(`#search-value`).val(``);
         searchWeather(citySearch);
     });
 
