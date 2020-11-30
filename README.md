@@ -1,7 +1,7 @@
 # WeatherDashboard
 
 ## Description
-
+Display Temperature, Humidity, Wind Speeds, & UV Levels for any location with the Weather Dashboard!
 
 ## Table of Contents
 * [Title](#title)
@@ -17,7 +17,6 @@
 ### How to Deploy Application
 By using the deployed web application at https://breadbooks.github.io/WeatherDashboard/
 
-### Usage
 
 
 ### Want to Contribute? 
