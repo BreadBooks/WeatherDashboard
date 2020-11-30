@@ -1,4 +1,4 @@
-ocument).ready(function () {
+$(document).ready(function () {
     // Api Key
     const apiKey = `d562cbd8265941b5d14b93525f5bef9c`;
 // Search Button
