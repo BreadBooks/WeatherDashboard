@@ -18,7 +18,7 @@ $(document).ready(function () {
     }
     // Initial Weather Search
     function searchWeather(citySearch) {
-        var queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=${apiKey}`
+        var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=${apiKey}`
         $.ajax({
             type: `GET`,
             url: queryURL,
@@ -32,7 +32,7 @@ $(document).ready(function () {
                 var humid = newLocal;
                 var temp = $(`<p>`).addClass(`card-text`).text(`Temperature: ` + Math.round(((parseFloat(data.main.temp) - 273.15) * 1.8) + 32) + ` °F`);
                 var cardBody = $(`<div>`).addClass(`card-body`);
-                var img = $(`<img>`).attr(`src`, `http://openweathermap.org/img/w/` + data.weather[0].icon + `.png`);
+                var img = $(`<img>`).attr(`src`, `https://openweathermap.org/img/w/` + data.weather[0].icon + `.png`);
 
                 title.append(img);
                 cardBody.append(title, temp, humid, wind);
@@ -52,7 +52,7 @@ $(document).ready(function () {
     }
 // UV Levels, Color change to show warning levels
     function fetchUV(lat, lon) {
-        var queryURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
+        var queryURL = `https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
         $.ajax({
             type: `GET`,
             url: queryURL,
@@ -78,7 +78,7 @@ $(document).ready(function () {
     }
     // 5-Day Forecast
     function fiveDayForecast(citySearch) {
-        var queryURL = `http://api.openweathermap.org/data/2.5/forecast?q=${citySearch}&appid=${apiKey}`
+        var queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${citySearch}&appid=${apiKey}`
         $.ajax({
             type: "GET",
             url: queryURL,
@@ -96,7 +96,7 @@ $(document).ready(function () {
 
                         var title = $("<h5>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
 
-                        var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
+                        var img = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
 // Adjusting Tempature to be in Fahrenheit rather than Kelvin
                         var p1 = $("<p>").addClass("card-text").text("Temp: " + Math.round(((parseFloat(data.list[i].main.temp_max) - 273.15) * 1.8) + 32) + " °F");
                         var p2 = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
@@ -112,6 +112,8 @@ $(document).ready(function () {
     }
     // Calling Clear All Button
     clearBtn();
+
+
     var history = JSON.parse(window.localStorage.getItem(`history`)) || [];
 
     if (history.length > 0) {
