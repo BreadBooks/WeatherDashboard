@@ -30,6 +30,7 @@ $(document).ready(function () {
                 var wind = $(`<p>`).addClass(`card-text`).text(`Wind Speed: ` + data.wind.speed + ` MPH`);
                 const newLocal = $(`<p>`).addClass(`card-text`).text(`Humidity: ` + data.main.humidity + `%`);
                 var humid = newLocal;
+                // Adjusting Tempature to be in Fahrenheit rather than Kelvin
                 var temp = $(`<p>`).addClass(`card-text`).text(`Temperature: ` + Math.round(((parseFloat(data.main.temp) - 273.15) * 1.8) + 32) + ` °F`);
                 var cardBody = $(`<div>`).addClass(`card-body`);
                 var img = $(`<img>`).attr(`src`, `https://openweathermap.org/img/w/` + data.weather[0].icon + `.png`);
