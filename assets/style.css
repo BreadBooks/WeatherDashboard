@@ -57,10 +57,13 @@ body {
   
 }
 .btn-warning:hover {
-  background-color: rgb(243, 162, 177) !important;
+  background-color: rgb(235, 86, 143) !important;
+  color: white;
+  
 }
 .btn-warning:active {
-  background-color:rgb(233, 114, 136) !important;
+  background-color:rgb(212, 49, 112) !important;
+  color: white;
 }
 .btn-danger {
   background-color: rgb(228, 9, 93);

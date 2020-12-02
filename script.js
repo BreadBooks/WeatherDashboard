@@ -41,6 +41,7 @@ $(document).ready(function () {
 
                 fiveDayForecast(citySearch);
                 fetchUV(data.coord.lat, data.coord.lon);
+                
                 if (history.indexOf(citySearch) === -1) {
                     history.push(citySearch);
                     window.localStorage.setItem(`history`, JSON.stringify(history));
@@ -112,7 +113,6 @@ $(document).ready(function () {
     }
     // Calling Clear All Button
     clearBtn();
-
 
     var history = JSON.parse(window.localStorage.getItem(`history`)) || [];
 
